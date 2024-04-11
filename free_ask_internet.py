@@ -35,7 +35,7 @@ def search_web_ref(query:str, debug=False):
 
         safe_string = urllib.parse.quote_plus(":all !general " + query)
 
-        response = requests.get('http://searxng:8080?q=' + safe_string + '&format=json')
+        response = requests.get('http://searxng:8080?q=' + safe_string + '&format=json', timeout=60)
         response.raise_for_status()
         search_results = response.json()
  
