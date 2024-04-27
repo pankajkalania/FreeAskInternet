@@ -1,21 +1,14 @@
 # -*- coding: utf-8 -*-
 
-import json
-import os 
 from pprint import pprint
-import requests
 import trafilatura
-from trafilatura import bare_extraction
 from concurrent.futures import ThreadPoolExecutor
 import concurrent
-import requests
 import openai
-import time 
-from datetime import datetime
 from urllib.parse import urlparse
 import tldextract
-import platform
 import urllib.parse
+from security import safe_requests
 
  
 def extract_url_content(url):
@@ -35,7 +28,7 @@ def search_web_ref(query:str, debug=False):
 
         safe_string = urllib.parse.quote_plus(":all !general " + query)
 
-        response = requests.get('http://searxng:8080?q=' + safe_string + '&format=json')
+        response = safe_requests.get('http://searxng:8080?q=' + safe_string + '&format=json')
         response.raise_for_status()
         search_results = response.json()
  
